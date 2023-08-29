@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: blanchedalmond;
+    width: 100vw;
+    height: 100vh;
+    font-size: 12px;
+    overflow: hidden;
+    /* border: 1px solid red; */
+}
+
+/* Header */
+/*border: 1px solid red*/
+.header {
+    background-color: rgba(75, 49, 9, 0.809);
+    color: rgba(255, 106, 0, 0.668);
+    font-size: 2.5rem;
+    font-weight: bolder;
+    height: 8rem;
+}
+
+:where(.container-info, .header, .scorecard, .btn-container) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Info For scoreboard and current situtation*/
+h1 {
+    color: red;
+    font-size: 2rem;
+}
+p {
+    font-size: 1.1rem;
+    color: rgb(141, 92, 0);
+}
+.container-info {
+    /* border: 1px solid red; */
+    height: 14rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.scorecard {
+    gap: 12rem;
+    padding: 12px;
+}
+
+.score {
+    color: rebeccapurple;
+    font-size: 1rem;
+    text-align: center;
+}
+
+h2 {
+    color: green;
+    font-size: 1.25rem;
+}
+
+/* Moves Button for R.P.S */
+.btn-container {
+    height: 12rem;
+    gap: 3rem;
+}
+
+.btn-container button {
+    border: none;
+    background-color: rgba(135, 26, 26, 0.424);
+    width: 6.5rem;
+    caret-color: transparent;
+    box-shadow: 5px 5px 5px currentColor;
+}
+
+.btn-container button:hover {
+    box-shadow: none;
+    transform: scale(1.1);
+}
+.sign{
+    font-size: 4rem;
+    padding: 0.1rem;
+    aspect-ratio: 1/1;
+}
+
+.reset {
+    width: 4rem;
+    height: auto;
+    padding: 3px;
+    background-color: chocolate;
+    color: white;
+}
+/* Things learned while making this project
+
+1. Hide the cursor blinking when you select any button
+SOLUTION:***caret-color: transparent;****
+
+2. box shadow property
+3. how to increase the scale by transform
+*/

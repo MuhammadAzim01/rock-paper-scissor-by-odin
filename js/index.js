@@ -1,9 +1,7 @@
-console.log("Welcome to tic tac toe game");
-
 const CHOICE = {
-    0 : "ROCK",
-    1 : "PAPER",
-    2 : "SCISSOR"
+    0 : "rock",
+    1 : "paper",
+    2 : "scissor"
 };
 
 function getComputerChoice() {
@@ -15,43 +13,56 @@ function getComputerChoice() {
     }  
 }
 
-let playerInfo = {
-    selection : null,
-    winCount: 0,                         
-};
-
-let computerInfo = {
-    selection : null,
-    winCount: 0, 
-};
+const scores = document.querySelectorAll(".score");
 
 function playRound(playerSelection, computerSelection) { 
     if (playerSelection == computerSelection) {
         return "It is a tie!";
-    } else if ((playerSelection == "ROCK" && computerSelection == "SCISSOR") || 
-                (playerSelection == "PAPER" && computerSelection == "ROCK") ||
-                (playerSelection == "SCISSOR" && computerSelection == "PAPER")) 
+    } else if ((playerSelection == "rock" && computerSelection == "scissor") || 
+                (playerSelection == "paper" && computerSelection == "rock") ||
+                (playerSelection == "scissor" && computerSelection == "paper")) 
     {
-        playerInfo.winCount++;
+        scores[0].innerText++;
         return "You win! " + playerSelection + " beats " + computerSelection;  
     } else {
-        computerInfo.winCount++;
+        scores[1].innerText++;
         return "You Loss! " + computerSelection + " beats " + playerSelection;  
     }
 }
 
-function game() {
-    console.log("Lets Play Game");
-    while (playerInfo.winCount != 5 && computerInfo.winCount != 5) {
-        playerInfo.selection = prompt("Your turn: ");
-        computerInfo.selection = getComputerChoice();
-        console.log(playRound(playerInfo.selection.toUpperCase(), computerInfo.selection));
-    }
-    if (playerInfo.winCount == 5) {
-        return true;
-    }
-    return false;
+const result = document.querySelector(".result");
+const buttons = document.querySelectorAll(".btn");
+
+function createResetbtn () {
+    const resetbtn = document.createElement("button");
+    resetbtn.className = "reset";
+    resetbtn.textContent = "RESET";
+    return resetbtn;
 }
 
-game() ? console.log("You Won the Gane!") : console.log("You Lost the Gane!");
+function toggleButtons(toggle) {
+    buttons.forEach(button => button.disabled = toggle) 
+}
 
+
+buttons.forEach(button => {
+    button.addEventListener('click', ()=> {
+        const playerScore = scores[0].textContent;
+        const computerScore = scores[1].textContent;
+        if (playerScore < 5 && computerScore < 5) {
+            result.innerText = playRound(button.id, getComputerChoice());
+        } else {
+            toggleButtons(true);
+            result.innerText = "Game End";
+            const container = document.querySelector(".container-info");
+            const resetbtn = createResetbtn();
+            container.appendChild(resetbtn);
+            resetbtn.addEventListener('click', ()=> {
+                toggleButtons(false);
+                scores.forEach(score => score.textContent = 0);
+                result.innerText = "First to five wins";
+                resetbtn.remove();
+            });
+        }
+    })
+});
